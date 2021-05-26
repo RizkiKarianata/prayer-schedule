@@ -1,10 +1,10 @@
 # CRUD Framework7
-Aplikasi CRUD Sederhana Berbasis Mobile yang menggunakan Framework7 berguna untuk teman - teman yang baru belajar mobile menggunakan Framework7
+Aplikasi JSholat Berbasis Mobile menggunakan Framework7 merupakan aplikasi yang berguna untuk mengetaui info jadwal sholat yang ada di seluruh wilayah Indonesia.
 
 # Usage
 * Install Node.js
-* Buka direktori Zodiak Weton di Command Prompt
-* Ketik npm start
+* Buka direktori JSholat di Command Prompt
+* Ketik npm start atau npm run dev
 * Otomatis terbuka localhost:8080
 
 ## Framework7 CLI Options
