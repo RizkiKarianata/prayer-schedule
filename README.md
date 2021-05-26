@@ -7,6 +7,9 @@ Aplikasi JSholat Berbasis Mobile menggunakan Framework7 merupakan aplikasi yang 
 * Ketik npm start atau npm run dev
 * Otomatis terbuka localhost:8080
 
+# App Image
+![Alt text](https://karianata.com/framework7/jsholat_1.png)
+
 ## Framework7 CLI Options
 
 Framework7 app created with following options:
@@ -105,6 +108,9 @@ framework7 assets --ui
 
 Love Framework7? Support project by donating or pledging on patreon:
 https://patreon.com/vladimirkharlampidi
+
+# Download Application
+* [JSholat (Android) via Mediafire](https://www.mediafire.com/file/j7avimow3d6wyez/JSholat-Android.apk/file)
 
 ## License
 MIT License 2020, Rizki Karianata.
