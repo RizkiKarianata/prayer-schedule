@@ -1,0 +1,324 @@
+<template>
+	<div class="page">
+		<div class="navbar">
+			<div class="navbar-bg"></div>
+			<div class="navbar-inner sliding">
+				<div class="left">
+					<a href="/">
+						<i class="icon f7-icons if-not-md">arrow_left</i>
+						<i class="icon material-icons if-md">arrow_back</i>
+					</a>
+				</div>
+				{{#if user}}
+				<div class="title">{{nama}}</div>
+				{{else}}
+				{{/if}}
+			</div>
+		</div>
+		<div class="page-content">
+			<div class="card card-expandable">
+				<div class="card-content">
+					<div class="bg-color-red" style="height: 300px">
+						<div class="card-header text-color-white display-block">
+							Jadwal Sholat
+							<br>
+							<small style="opacity: 0.7">Pertanggal</small>
+						</div>
+						<a href="#" class="link card-close card-opened-fade-in color-white" style="position: absolute; right: 15px; top: 15px">
+							<i class="icon f7-icons">xmark_circle_fill</i>
+						</a>
+					</div>
+					<div class="card-content-padding">
+						<div class="block block-strong" style="margin-bottom: 20px;">
+							<p>Apa itu sholat? sholat secara etimologi adalah doa. Adapun sholat secara terminologi adalah perkataan dan perbuatan sekalipun itu perbuatan hati yang di awali dengan takbir bersamaan dengan niat dan di akhiri dengan salam yang dilakukan dengan beberapa syarat tertentu.</p>
+						</div>
+						<div class="block block-strong no-padding" style="margin-bottom: 30px;">
+							<div id="demo-calendar-inline-container"></div>
+							<input type="hidden" name="datevalue" id="datevalue">
+							<input type="hidden" name="cityvalue" id="cityvalue">
+						</div>
+						<div class="block">
+							<p class="row">
+								<button class="col button button-large button-raised button-fill button-round" @click="submitDay">Lihat Jadwal Sholat</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card card-expandable">
+				<div class="card-content">
+					<div class="bg-color-yellow" style="height: 300px">
+						<div class="card-header text-color-black display-block">
+							Jadwal Sholat
+							<br>
+							<small style="opacity: 0.7">Perbulan</small>
+						</div>
+						<a href="#" class="link card-close card-opened-fade-in color-black" style="position: absolute; right: 15px; top: 15px">
+							<i class="icon f7-icons">xmark_circle_fill</i>
+						</a>
+					</div>
+					<div class="card-content-padding">
+						<div class="block block-strong" style="margin-bottom: 20px;">
+							<p>Apa itu sholat? sholat secara etimologi adalah doa. Adapun sholat secara terminologi adalah perkataan dan perbuatan sekalipun itu perbuatan hati yang di awali dengan takbir bersamaan dengan niat dan di akhiri dengan salam yang dilakukan dengan beberapa syarat tertentu.</p>
+						</div>
+						<div style="margin-bottom: 30px;">
+							<div class="list no-hairlines-md">
+								<ul>
+									<li class="item-content item-input">
+										<div class="item-inner">
+											<div class="item-title item-label">Tahun</div>
+											<div class="item-input-wrap">
+												<input id="year" name="year" type="text" placeholder="Pilih Tahun">
+											</div>
+										</div>
+									</li>
+									<li class="item-content item-input">
+										<div class="item-inner">
+											<div class="item-title item-label">Bulan</div>
+											<div class="item-input-wrap">
+												<input id="month" name="month" type="text" placeholder="Pilih Bulan">
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="block">
+							<p class="row">
+								<button class="col button button-large button-raised button-fill button-round" @click="submitMonth">Lihat Jadwal Sholat</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+		mounted() {
+			var $this = this;
+			var app = this.$app;
+			var $$ = this.$$;
+			var self = this;
+			var monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus' , 'September' , 'Oktober', 'November', 'Desember'];
+			var calendarInline = app.calendar.create({
+				containerEl: '#demo-calendar-inline-container',
+				value: [new Date()],
+				weekHeader: false,
+				renderToolbar: function () {
+					return '<div class="toolbar calendar-custom-toolbar no-shadow">' +
+					'<div class="toolbar-inner">' +
+					'<div class="left">' +
+					'<a href="#" class="link icon-only"><i class="icon icon-back ' + (app.theme === 'md' ? 'color-black' : '') + '"></i></a>' +
+					'</div>' +
+					'<div class="center"></div>' +
+					'<div class="right">' +
+					'<a href="#" class="link icon-only"><i class="icon icon-forward ' + (app.theme === 'md' ? 'color-black' : '') + '"></i></a>' +
+					'</div>' +
+					'</div>' +
+					'</div>';
+				},
+				on: {
+					init: function (c) {
+						$$('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] +', ' + c.currentYear);
+						$$('.calendar-custom-toolbar .left .link').on('click', function () {
+							calendarInline.prevMonth();
+						});
+						$$('.calendar-custom-toolbar .right .link').on('click', function () {
+							calendarInline.nextMonth();
+						});
+					},
+					monthYearChangeStart: function (c) {
+						$$('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] +', ' + c.currentYear);
+					},
+					calendarChange: function (calendar, value) {
+						function formatDate(date) {
+							var d = new Date(date),
+							month = '' + (d.getMonth() + 1),
+							day = '' + d.getDate(),
+							year = d.getFullYear();
+
+							if (month.length < 2) 
+								month = '0' + month;
+							if (day.length < 2) 
+								day = '0' + day;
+
+							return [year, month, day].join('-');
+						}
+						$$('#datevalue').val(formatDate(value));
+					}
+				}
+			});
+			var tahun = [];
+			for (var i = 0; i <= 10; i++) {
+				tahun.push(2015 + i);
+			}
+			var yearFirst = tahun.join(" ");
+
+			var year = (yearFirst).split(' ');
+			var month = ('Januari Februari Maret April Mei Juni Juli Agustus September Oktober November Desember').split(' ');
+			var autocompleteYear = app.autocomplete.create({
+				inputEl: '#year',
+				openIn: 'dropdown',
+				typeahead: true,
+				source: function (query, render) {
+					var results = [];
+					if (query.length === 0) {
+						render(results);
+						return;
+					}
+					for (var i = 0; i < year.length; i++) {
+						if (year[i].toLowerCase().indexOf(query.toLowerCase()) === 0) results.push(year[i]);
+					}
+					render(results);
+				}
+			});
+			var autocompleteMonth = app.autocomplete.create({
+				inputEl: '#month',
+				openIn: 'dropdown',
+				typeahead: true,
+				source: function (query, render) {
+					var results = [];
+					if (query.length === 0) {
+						render(results);
+						return;
+					}
+					for (var i = 0; i < month.length; i++) {
+						if (month[i].toLowerCase().indexOf(query.toLowerCase()) === 0) results.push(month[i]);
+					}
+					render(results);
+				}
+			});
+		},
+		methods: {
+			submitDay: function() {
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var self = this;
+				var dateValue = $$('#datevalue').val();
+				var cityValue = $$('#cityvalue').val();
+
+				localStorage.setItem('date', dateValue);
+				localStorage.setItem('city', cityValue);
+				localStorage.setItem('filter', 'Pertanggal');
+				app.dialog.progress("Mohon tunggu sebentar...");
+				setTimeout(function () {
+					app.dialog.close();
+					app.views.main.router.navigate('/result/');
+				}, 3500);
+			},
+			submitMonth: function() {
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var self = this;
+
+				var tahun = [];
+				for (var i = 0; i <= 10; i++) {
+					tahun.push(2015 + i);
+				}
+				var yearFirst = tahun.join(", ");
+				var monthFirst = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus' , 'September' , 'Oktober', 'November', 'Desember'];
+
+				var cityValue = $$('#cityvalue').val();
+				var yearValue = $$('#year').val();
+				var monthValue = $$('#month').val();
+
+				localStorage.setItem('city', cityValue);
+				localStorage.setItem('filter', 'Perbulan');
+
+				if(yearValue == "" || monthValue == "") {
+					app.dialog.alert('Pilih terlebih dahulu');
+				}else if(yearFirst.includes(yearValue) == false) {
+					app.dialog.alert('Tahun tidak tersedia');
+				}else if(monthFirst.includes(monthValue) == false) {
+					app.dialog.alert('Bulan tidak tersedia');
+				}else {
+					if(monthValue == "Januari") {
+						var bulan = "01";
+					}else if(monthValue == "Februari") {
+						var bulan = "02";
+					}else if(monthValue == "Maret") {
+						var bulan = "03";
+					}else if(monthValue == "April") {
+						var bulan = "04";
+					}else if(monthValue == "Mei") {
+						var bulan = "05";
+					}else if(monthValue == "Juni") {
+						var bulan = "06";
+					}else if(monthValue == "Juli") {
+						var bulan = "07";
+					}else if(monthValue == "Agustus") {
+						var bulan = "08";
+					}else if(monthValue == "September") {
+						var bulan = "09";
+					}else if(monthValue == "Oktober") {
+						var bulan = "10";
+					}else if(monthValue == "November") {
+						var bulan = "11";
+					}else if(monthValue == "Desember") {
+						var bulan = "12";
+					}else {
+						var bulan = "0";
+					}
+					localStorage.setItem('year', yearValue);
+					localStorage.setItem('month', bulan);
+					app.dialog.progress("Mohon tunggu sebentar...");
+					setTimeout(function () {
+						app.dialog.close();
+						app.views.main.router.navigate('/result/');
+					}, 3500);
+				}
+			},
+		},
+		on: {
+			pageInit: function () {
+				var self = this;
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var id = this.$route.params.id;
+				var items = [];
+				var dataJSON = new Array();
+				var d = new Date();
+				function formatDate() {
+					var d = new Date(),
+					month = '' + (d.getMonth() + 1),
+					day = '' + d.getDate(),
+					year = d.getFullYear();
+
+					if (month.length < 2) 
+						month = '0' + month;
+					if (day.length < 2) 
+						day = '0' + day;
+
+					return [year, month, day].join('-');
+				}
+				$$('#datevalue').val(formatDate());
+				$$('#cityvalue').val(id);
+				app.request.get('https://jadwal-shalat-api.herokuapp.com/cities', (response) => {
+					dataJSON = JSON.parse(response);
+					var tampil = dataJSON.data;
+					for(var i = 0; i < tampil.length; i++) {
+						var semuadata = tampil[i];
+						var namaCity = semuadata.cityName;
+						var idCity = semuadata.cityId;
+						if(idCity == id) {
+							items.push({
+								title: namaCity,
+								id: id
+							});
+						}
+					}
+					console.log(items[0]);
+					self.$setState({
+						user: tampil,
+						nama: items[0].title,
+					});
+				});
+			},
+		},
+	}
+</script>

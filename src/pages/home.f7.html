@@ -1,0 +1,84 @@
+<template>
+	<div class="page">
+		<div class="navbar">
+			<div class="navbar-bg"></div>
+			<div class="navbar-inner sliding">
+				<div class="title">Jadwal Sholat</div>
+				<div class="subnavbar">
+					<form data-search-container=".virtual-list" data-search-item="li" data-search-in=".item-title" class="searchbar searchbar-init">
+						<div class="searchbar-inner">
+							<div class="searchbar-input-wrap">
+								<input type="search" placeholder="Cari Kota"/>
+								<i class="searchbar-icon"></i>
+								<span class="input-clear-button"></span>
+							</div>
+							<span class="searchbar-disable-button if-not-aurora">Batal</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="searchbar-backdrop"></div>
+		<div class="page-content">
+			<div class="list simple-list searchbar-not-found">
+				<ul>
+					<li>Kota tidak ditemukan</li>
+				</ul>
+			</div>
+			<div class="list virtual-list media-list searchbar-found"></div>
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+		mounted() {
+			var $this = this;
+			var app = this.$app;
+			var $$ = this.$$;
+			root: this.$app;
+			cargarListaClinicas();
+
+			function cargarListaClinicas() {
+				var items = [];
+				var dataJSON = new Array();
+				app.request.get('https://jadwal-shalat-api.herokuapp.com/cities', function (response,status) {
+					dataJSON = JSON.parse(response);
+					var tampil = dataJSON.data;
+					for(var i = 0; i < tampil.length; i++) {
+						var semuadata = tampil[i];
+						var nama = semuadata.cityName;
+						var id = semuadata.cityId;
+						items.push({
+							title: nama,
+							subtitle: "Info Selengkapnya",
+							id: id
+						});
+					}
+					var virtualList = app.virtualList.create({
+						el: '.virtual-list',
+						items: items,
+						searchAll: function (query, items) {
+							var found = [];
+							for (var i = 0; i < items.length; i++) {
+								if (items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+							}
+							return found;
+						},
+						itemTemplate:
+						'<li>' +
+						'<a href="/city/{{id}}/" class="item-link item-content">' +
+						'<div class="item-inner">' +
+						'<div class="item-title-row">' +
+						'<div class="item-title">{{title}}</div>' +
+						'</div>' +
+						'<div class="item-subtitle">{{subtitle}}</div>' +
+						'</div>' +
+						'</a>' +
+						'</li>',
+						height: app.theme === 'ios' ? 63 : (app.theme === 'md' ? 73 : 46),
+					});
+				});
+			}
+		},
+	}
+</script>

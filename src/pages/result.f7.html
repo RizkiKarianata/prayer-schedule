@@ -1,0 +1,120 @@
+<template>
+	<div class="page">
+		<div class="navbar">
+			<div class="navbar-bg"></div>
+			<div class="navbar-inner sliding">
+				<div class="left">
+					<a href="/">
+						<i class="icon f7-icons if-not-md">arrow_left</i>
+						<i class="icon material-icons if-md">arrow_back</i>
+					</a>
+				</div>
+				<div class="title">Jadwal Sholat</div>
+			</div>
+		</div>
+		<div class="page-content">
+			{{#if user}}
+			<div class="block">
+				<p>Keterangan : Jadwal Sholat {{user.date}} {{user.region}}</p>
+			</div>
+			<div class="list">
+				<ul>
+					{{#each user2}}
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">{{this.name}}</div>
+								<div class="item-after">{{this.time}}</div>
+							</div>
+						</div>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+			{{else}}
+			{{/if}}
+			{{#if user3}}
+			<div class="block">
+				<p>Keterangan : Jadwal Sholat Bulan {{user3.month}} {{user3.region}}</p>
+			</div>
+			<div class="list accordion-list">
+				<ul>
+					{{#each user4}}
+					<li class="accordion-item"><a href="#" class="item-content item-link">
+						<div class="item-inner">
+							<div class="item-title">{{this.date}}</div>
+						</div></a>
+						<div class="accordion-item-content">
+							<div class="list">
+								<ul>
+									{{#each this.dataRow}}
+									<li>
+										<div class="item-content">
+											<div class="item-inner">
+												<div class="item-title">{{this.name}}</div>
+												<div class="item-after">{{this.time}}</div>
+											</div>
+										</div>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+			{{else}}
+			{{/if}}
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+		mounted() {
+			var $this = this;
+			var app = this.$app;
+			var $$ = this.$$;
+			var self = this;
+		},
+		on: {
+			pageInit: function () {
+				var self = this;
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var filter = localStorage.getItem('filter');
+				var dataJSON = new Array();
+				var items = [];
+				if(filter == "Pertanggal") {
+					var date = localStorage.getItem('date');
+					var city = localStorage.getItem('city');
+					app.request.get('https://jadwal-shalat-api.herokuapp.com/daily?date='+date+'&cityId='+city, (response) => {
+						dataJSON = JSON.parse(response);
+						var tampil = dataJSON.data;
+						var tampil2 = tampil.data;
+						self.$setState({
+							user: tampil,
+							user2: tampil2,
+							id: city,
+						});
+					});
+				}else {
+					var city = localStorage.getItem('city');
+					var year =  localStorage.getItem('year');
+					var month = localStorage.getItem('month');
+					app.request.get('https://jadwal-shalat-api.herokuapp.com/monthly?month='+year+'-'+month+'&cityId='+city, (response) => {
+						dataJSON = JSON.parse(response);
+						var tampil = dataJSON.data;
+						var tampil2 = tampil.data;
+						self.$setState({
+							id: city,
+							user3: tampil,
+							user4: tampil2,
+						});
+					});
+				}
+			},
+		},
+	}
+</script>
