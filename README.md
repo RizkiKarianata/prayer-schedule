@@ -1,4 +1,4 @@
-# CRUD Framework7
+# JSholat
 Aplikasi JSholat Berbasis Mobile menggunakan Framework7 merupakan aplikasi yang berguna untuk mengetaui info jadwal sholat yang ada di seluruh wilayah Indonesia.
 
 # Usage
