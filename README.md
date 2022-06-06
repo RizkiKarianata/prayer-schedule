@@ -1,63 +1,50 @@
-# JSholat
-Aplikasi JSholat Berbasis Mobile menggunakan Framework7 merupakan aplikasi yang berguna untuk mengetaui info jadwal sholat yang ada di seluruh wilayah Indonesia.
+<h1 align="center">Welcome to Prayer Schedule! 👋 </h1>
 
-# Usage
-* Install Node.js
-* Buka direktori JSholat di Command Prompt
-* Ketik npm start atau npm run dev
-* Otomatis terbuka localhost:8080
+<p align="center">Prayer Schedule is a simple mobile-based application that is useful for finding out information on prayer schedules throughout Indonesia. Built using Framework7. 💖 </p>
 
-# App Image
-![Alt text](https://karianata.com/framework7/jsholat_1.png)
+<p align="center">
+<img src="https://img.shields.io/github/contributors/RizkiKarianata/prayer-schedule?style=flat-square">
+<img src="https://img.shields.io/github/issues/RizkiKarianata/prayer-schedule?style=flat-square">
+<img src="https://img.shields.io/github/stars/RizkiKarianata/prayer-schedule?style=flat-square"> 
+<img src="https://img.shields.io/github/forks/RizkiKarianata/prayer-schedule?style=flat-square">
+<img src="https://img.shields.io/github/last-commit/RizkiKarianata/prayer-schedule.svg?style=flat-square">
+<img src="https://img.shields.io/github/languages/code-size/RizkiKarianata/prayer-schedule?style=flat-square">
+<img src="https://img.shields.io/github/license/RizkiKarianata/prayer-schedule?style=flat-square">
+</p>
 
-## Framework7 CLI Options
+<p align="center">
+<a href="https://karianata.com/prayer-schedule/demo">Demo Page</a>&nbsp;&nbsp;&nbsp;
+<a href="https://karianata.com/prayer-schedule/docs">Documentation Page</a>&nbsp;&nbsp;&nbsp;
+</p>
 
-Framework7 app created with following options:
+## 💾 Requirements
 
-```
-{
-  "cwd": "C:\\Users\\pavilion\\Documents\\ProjectSourceTree\\JSholat",
-  "type": [
-    "web",
-    "cordova"
-  ],
-  "name": "JSholat",
-  "framework": "core",
-  "template": "tabs",
-  "bundler": "webpack",
-  "cssPreProcessor": "stylus",
-  "theming": {
-    "customColor": false,
-    "color": "#007aff",
-    "darkTheme": false,
-    "iconFonts": true,
-    "fillBars": false
-  },
-  "customBuild": false,
-  "webpack": {
-    "developmentSourceMap": true,
-    "productionSourceMap": true,
-    "hashAssets": false,
-    "preserveAssetsPaths": false,
-    "inlineAssets": true
-  },
-  "pkg": "io.framework7.myapp",
-  "cordova": {
-    "folder": "cordova",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "plugins": [
-      "cordova-plugin-statusbar",
-      "cordova-plugin-keyboard",
-      "cordova-plugin-splashscreen"
-    ]
-  }
-}
-```
+* `Node.js` - used for the entire application development process. Whether it's making an API or something
+* `Web Browser` - can be used as an emulator to build applications. Example [Chrome, Firefox, Safari & Opera]
+* `Internet` - because many use CDN and to make it easier to find solutions to all problems
+* `Composer` - make it easier for developers to manage PHP project dependencies
+* `Android SDK` - to simplify the process of building applications
+* `Gradle` - function to perform application building automatically
+* `Java Development Kit` - used for support in developing or building an application
 
-## NPM Scripts
+## 🎯 How To Use
+
+#### Using the built-in ready to use from the release (Recommended)
+
+Download the latest project release from the [Release Page](https://github.com/RizkiKarianata/prayer-schedule "Release Page"). Open the Prayer Schedule project folder using a terminal and type `npm run dev`. To explore the source code you can use a text editor such as Visual Studio Code.
+
+#### Build manually
+
+* Before starting, make sure you have Node.js installed first
+* If you have installed Node.js. Run the command git clone which is `https://github.com/RizkiKarianata/prayer-schedule`
+* Install the dependencies using the node package manager of your choice. For example run `npm install` in terminal
+* To run the application you can run the command `npm run dev`. And the application will automatically open using port 8080 on your default browser
+
+#### Build to APK
+
+* You can run commands like in the `NPM Scripts` below by adding `npm run`. Example `npm run build-dev-cordova-android` on terminal
+
+## 🛠 NPM Scripts
 
 * 🔥 `start` - run development server
 * 🔧 `dev` - run development server
@@ -70,49 +57,57 @@ Framework7 app created with following options:
 * 📱 `build-dev-cordova-android` - build cordova Android app using development mode (faster build without minification and optimization)
 * 📱 `build-prod-cordova-android` - build cordova Android app
 
-## WebPack
+## 📋 Documentation & Resources
 
-There is a webpack bundler setup. It compiles and bundles all "front-end" resources. You should work only with files located in `/src` folder. Webpack config located in `build/webpack.config.js`.
+* [Framework7](https://framework7.io/)
+* [Apache Cordova](https://cordova.apache.org/)
+* [Node.js](https://nodejs.org/en/)
+* [Download Prayer Schedule - Mediafire](https://www.mediafire.com/file/j7avimow3d6wyez/JSholat-Android.apk/file)
+* Did you build a framework or other features? Open up Pull Requests and put yours here! 😃
 
-Webpack has specific way of handling static assets (CSS files, images, audios). You can learn more about correct way of doing things on [official webpack documentation](https://webpack.js.org/guides/asset-management/).
-## Cordova
+## 📆 Release Date
 
-Cordova project located in `cordova` folder. You shouldn't modify content of `cordova/www` folder. Its content will be correctly generated when you call `npm run cordova-build-prod`.
+* v1.0.0 : 06 June 2022
 
+## 🧑 Author
 
+* Facebook : <a href="https://www.facebook.com/rizky.slankers.3386"> Rizki Karianata</a>
+* Instagram : <a href="https://www.instagram.com/rizkikarianata"> @rizkikarianata</a>
+* Youtube : <a href="https://www.youtube.com/channel/UCwhkJwsq6swJrerdP0tixJA"> @rizkikarianata</a>
+* LinkedIn :  <a href="https://www.linkedin.com/in/rizkikarianata"> @rizkikarianata</a>
 
-## Assets
+## 🤝 Contributing
 
-Assets (icons, splash screens) source images located in `assets-src` folder. To generate your own icons and splash screen images, you will need to replace all assets in this directory with your own images (pay attention to image size and format), and run the following command in the project directory:
+<p>I really appreciate contributions, issues and feature requests because this application is far from perfect. Feel free to Pull Request and make changes to this project.</p>
+<p>Since this is an open source project I finished it myself. There may be many features or things that could be improved or added. So I really appreciate your help.</p>
 
-```
-framework7 assets
-```
+#### Steps To Contribute
 
-Or launch UI where you will be able to change icons and splash screens:
+* Fork it ( https://github.com/RizkiKarianata/prayer-schedule )
+* Create your feature branch (`git checkout -b my-new-feature`)
+* Commit your changes (`git commit -am 'Add some feature'`)
+* Push to the branch (`git push origin my-new-feature`)
+* Create a new Pull Request
 
-```
-framework7 assets --ui
-```
+#### Notes To Contribute
 
-## Documentation & Resources
+Make sure to not commit generated files from your dist folder. All changes need to be made in the source files located in the `src` folder.
 
-* [Framework7 Core Documentation](https://framework7.io/docs/)
+* Change the `scss` files to adapt styles
+* Change the nunjucks based `html` files or the content defining `json` files to adapt layout and content
+* Change the `js` files to adapt the application code
 
+Always run a build and test the results before committing.
 
+## 📝 License
 
-* [Framework7 Icons Reference](https://framework7.io/icons/)
-* [Community Forum](https://forum.framework7.io)
+* Copyright © 2020 Rizki Karianata
+* **Prayer Schedule is an open source project licensed under the MIT license**
 
-## Support Framework7
+## ☕️ Suppport & Donation
 
-Love Framework7? Support project by donating or pledging on patreon:
-https://patreon.com/vladimirkharlampidi
+Love Prayer Schedule? Support this project by donating or sharing with others in need.
 
-# Download Application
-* [JSholat (Android) via Mediafire](https://www.mediafire.com/file/j7avimow3d6wyez/JSholat-Android.apk/file)
+<a href="https://www.buymeacoffee.com/rizkikarianata"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black"/> </a>
 
-## License
-MIT License 2020, Rizki Karianata.
-
-The data may not be used for commercial purposes.
+**Made with ❤️ Rizki Karianata**
